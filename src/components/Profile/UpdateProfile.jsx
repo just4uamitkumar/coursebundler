@@ -6,20 +6,24 @@ import { updateProfile } from '../../redux/actions/profile';
 import { loadUser } from '../../redux/actions/user';
 
 const UpdateProfile = ({ user }) => {
-  const [name, setName] = useState(user.name);
+  const { loading } = useSelector(state => state.profile);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
+  const [mobile, setMobile] = useState(user.mobile ?? 0);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const submitHandler = async e => {
+
+  const submitHandler = (e)=> {
     e.preventDefault();
-    await dispatch(updateProfile(name, email));
+    dispatch(updateProfile(firstName, lastName, email, mobile));
     dispatch(loadUser());
     navigate('/profile');
   };
 
- const { loading } = useSelector(state => state.profile);
+ 
   return (
     <Container py="16" minH={'90vh'}>
       <form onSubmit={submitHandler}>
@@ -29,20 +33,33 @@ const UpdateProfile = ({ user }) => {
           my="16"
           textAlign={['center', 'left']}
         />
-
         <VStack spacing={'8'}>
           <Input
-            value={name}
-            onChange={e => setName(e.target.value)}
-            placeholder="Name"
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+            placeholder="First Name"
             type={'text'}
             focusBorderColor="yellow.500"
-          />{' '}
+          />
+          <Input
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+            placeholder="Last Name"
+            type={'text'}
+            focusBorderColor="yellow.500"
+          />
           <Input
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="Email"
             type={'email'}
+            focusBorderColor="yellow.500"
+          />
+          <Input
+            value={mobile}
+            onChange={e => setMobile(e.target.value)}
+            placeholder="Mobile No."
+            type={'number'}
             focusBorderColor="yellow.500"
           />
           <Button

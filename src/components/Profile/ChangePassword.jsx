@@ -8,10 +8,22 @@ import { changePassword } from '../../redux/actions/profile';
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const dispatch = useDispatch();
   const submitHandler = e => {
     e.preventDefault();
+    if(newPassword.length < 8){
+      toast.error('Password must contain minimum 8 letters');
+      dispatch({ type: 'clearError' });
+      return
+    }
+
+    else if(newPassword !== confirmPassword){
+      toast.error('Password and Confirm Password must be same');
+      dispatch({ type: 'clearError' });
+      return
+    }
     dispatch(changePassword(oldPassword, newPassword));
   };
 
@@ -47,7 +59,6 @@ const ChangePassword = () => {
             type={'password'}
             focusBorderColor="yellow.500"
           />
-
           <Input
             required
             value={newPassword}
@@ -56,7 +67,14 @@ const ChangePassword = () => {
             type={'password'}
             focusBorderColor="yellow.500"
           />
-
+          <Input
+            required
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            type={'password'}
+            focusBorderColor="yellow.500"
+          />
           <Button
             isLoading={loading}
             w="full"

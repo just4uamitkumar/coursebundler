@@ -74,7 +74,7 @@ const Course = ({
           colorScheme={'yellow'}
           onClick={(e) => addToPlaylistHandler(id, e)}
         >
-          Add to playlist
+          Add to Playlist
         </Button>
       </Stack>
     </VStack>
@@ -91,7 +91,6 @@ const Courses = () => {
     if(!couseId){
       toast.error(error);
     }
-    console.log(couseId)
     await dispatch(addToPlaylist(couseId));
     dispatch(loadUser());
   };
