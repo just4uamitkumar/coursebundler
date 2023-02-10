@@ -157,7 +157,7 @@ export const getDashboardStats = () => async dispatch => {
     } catch (error) {
         dispatch({
             type: 'getAdminStatsFail',
-            payload: error.response.data.message,
+            payload: error?.response?.data?.message,
         });
     }
 };

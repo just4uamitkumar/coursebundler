@@ -16,6 +16,7 @@ import { CgGoogle, CgYoutube } from 'react-icons/cg';
 import { SiCoursera, SiUdemy } from 'react-icons/si';
 import { DiAws } from 'react-icons/di';
 import introVideo from '../../assets/videos/intro.mp4';
+import PosterImg from '../../assets/images/bg.png';
 
 const Home = () => {
   return (
@@ -82,6 +83,7 @@ const Home = () => {
           controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
           disableRemotePlayback
+          poster={PosterImg}
           src={introVideo}
         ></video>
       </div>

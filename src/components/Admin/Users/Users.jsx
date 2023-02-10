@@ -64,38 +64,39 @@ const Users = () => {
           my="16"
           textAlign={['center', 'left']}
         />
+        {
+          loading ? <Loader /> : (
+            <TableContainer w={['100vw', 'full']}>
+              <Table variant={'simple'} size="lg">
+                <TableCaption>All available users in the database</TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th>Id</Th>
+                    <Th>Name</Th>
+                    <Th>Email</Th>
+                    <Th>Role</Th>
+                    <Th>Subscription</Th>
+                    <Th isNumeric>Action</Th>
+                  </Tr>
+                </Thead>
 
-        <TableContainer w={['100vw', 'full']}>
-          <Table variant={'simple'} size="lg">
-            <TableCaption>All available users in the database</TableCaption>
-
-            <Thead>
-              <Tr>
-                <Th>Id</Th>
-                <Th>Name</Th>
-                <Th>Email</Th>
-                <Th>Role</Th>
-                <Th>Subscription</Th>
-                <Th isNumeric>Action</Th>
-              </Tr>
-            </Thead>
-
-            <Tbody>
-              {users &&
-                users.map(item => (
-                  <Row
-                    updateHandler={updateHandler}
-                    deleteButtonHandler={deleteButtonHandler}
-                    key={item._id}
-                    item={item}
-                    loading={loading}
-                  />
-                ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+                <Tbody>
+                  {users &&
+                    users.map(item => (
+                      <Row
+                        updateHandler={updateHandler}
+                        deleteButtonHandler={deleteButtonHandler}
+                        key={item._id}
+                        item={item}
+                        loading={loading}
+                      />
+                    ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          )
+        }
       </Box>
-
       <Sidebar />
     </Grid>
   );
@@ -107,7 +108,7 @@ function Row({ item, updateHandler, deleteButtonHandler, loading }) {
   return (
     <Tr>
       <Td>#{item._id}</Td>
-      <Td>{item.name}</Td>
+      <Td>{item.name ? item.name : item.firstName + ' ' + item.lastName}</Td>
       <Td>{item.email}</Td>
       <Td>{item.role}</Td>
       <Td>

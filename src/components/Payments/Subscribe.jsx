@@ -67,15 +67,7 @@ const Subscribe = ({ user }) => {
       };
       openPopUp();
     }
-  }, [
-    dispatch,
-    error,
-    courseError,
-    user.name,
-    user.email,
-    key,
-    subscriptionId,
-  ]);
+  }, [ dispatch, error, courseError, user.name, user.email, key, subscriptionId ]);
 
   return (
     <Container h="89vh" p="16">
@@ -90,12 +82,7 @@ const Subscribe = ({ user }) => {
             <Text children={`Join pro pack and get access to all content.`} />
             <Heading size="md" children={'₹299 Only'} />
           </VStack>
-          <Button
-            my="8"
-            w="full"
-            colorScheme={'yellow'}
-            onClick={subscribeHandler}
-            isLoading={loading}>
+          <Button my="8" w="full" colorScheme={'yellow'} onClick={subscribeHandler} isLoading={loading}>
             Buy Now
           </Button>
         </Box>

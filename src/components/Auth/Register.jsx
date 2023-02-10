@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { register } from '../../redux/actions/user';
+import toast from 'react-hot-toast';
 
 export const fileUploadCss = {
   cursor: 'pointer',
@@ -29,8 +30,10 @@ const fileUploadStyle = {
 
 const Register = () => {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 
@@ -48,18 +51,33 @@ const Register = () => {
   };
 
   const submitHandler = e => {
-    e.preventDefault();
-    const myForm = new FormData();
+   
+      e.preventDefault();
+      const myForm = new FormData();
+      myForm.append('firstName', firstName);
+      myForm.append('lastName', lastName);
+      myForm.append('email', email);
+      myForm.append('password', password);
+      myForm.append('file', image);
 
-    myForm.append('name', name);
-    myForm.append('email', email);
-    myForm.append('password', password);
-    myForm.append('file', image);
-    dispatch(register(myForm));
+      if(password.length < 8){
+        toast.error('Password must contain minimum 8 letters');
+        dispatch({ type: 'clearError' });
+        return
+      }
+
+      else if(password !== confirmPassword){
+        toast.error('Password and Confirm Password must be same');
+        dispatch({ type: 'clearError' });
+        return
+      }
+
+      dispatch(register(myForm));
+    
   };
 
   return (
-    <Container h={'95vh'}>
+    <Container>
       <VStack h={'full'} justifyContent="center" spacing={'16'}>
         <Heading textTransform={'uppercase'} children={'Registration'} />
 
@@ -68,13 +86,25 @@ const Register = () => {
             <Avatar src={imagePrev} size={'2xl'} />
           </Box>
           <Box my={'4'}>
-            <FormLabel htmlFor="name" children="Name" />
+            <FormLabel htmlFor="firstName" children="First Name" />
             <Input
               required
-              id="name"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              placeholder="abc"
+              id="firstName"
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
+              placeholder="First Name"
+              type={'text'}
+              focusBorderColor="yellow.500"
+            />
+          </Box>
+          <Box my={'4'}>
+            <FormLabel htmlFor="lastName" children="Last Name" />
+            <Input
+              required
+              id="lastName"
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
+              placeholder="Last Name"
               type={'text'}
               focusBorderColor="yellow.500"
             />
@@ -101,6 +131,18 @@ const Register = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="Enter Your Password"
+              type={'password'}
+              focusBorderColor="yellow.500"
+            />
+          </Box>
+          <Box my={'4'}>
+            <FormLabel htmlFor="confirmPassword" children="Confirm Password" />
+            <Input
+              required
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              placeholder="Confirm Password"
               type={'password'}
               focusBorderColor="yellow.500"
             />

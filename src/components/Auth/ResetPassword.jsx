@@ -7,6 +7,7 @@ import { resetPassword } from '../../redux/actions/profile';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const params = useParams();
   const navigate = useNavigate();
@@ -50,6 +51,15 @@ const ResetPassword = () => {
             type={'password'}
             focusBorderColor="yellow.500"
           />
+          <Input
+              required
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              placeholder="Confirm Password"
+              type={'password'}
+              focusBorderColor="yellow.500"
+            />
 
           <Button
            isLoading={loading}

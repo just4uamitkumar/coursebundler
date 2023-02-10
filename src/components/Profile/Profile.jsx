@@ -99,11 +99,15 @@ const Profile = ({ user }) => {
         <VStack spacing={'4'} alignItems={['center', 'flex-start']}>
           <HStack>
             <Text children="Name" fontWeight={'bold'} />
-            <Text children={user?.name} />
+            <Text children={user?.firstName + ' ' + user?.lastName} />
           </HStack>{' '}
           <HStack>
             <Text children="Email" fontWeight={'bold'} />
             <Text children={user?.email} />
+          </HStack>
+          <HStack>
+            <Text children="Phone" fontWeight={'bold'} />
+            <Text children={!user?.mobile ? 'Not Available' : user?.mobile} />
           </HStack>
           <HStack>
             <Text children="Created At" fontWeight={'bold'} />

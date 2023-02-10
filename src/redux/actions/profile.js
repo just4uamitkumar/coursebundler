@@ -1,24 +1,17 @@
 import { server } from '../store';
 import axios from 'axios';
 
-export const updateProfile = (name, email) => async dispatch => {
+export const updateProfile = (firstName, lastName, email, mobile) => async dispatch => {
     try {
         dispatch({ type: 'updateProfileRequest' });
+        console.log(firstName, lastName, email, mobile)
 
-        const { data } = await axios.put(
-            `${server}/updateprofile`,
-            {
-                name,
-                email,
-            },
-            {
-                headers: {
-                    'Content-type': 'application/json',
-                },
+        const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-                withCredentials: true,
-            }
-        );
+        const { data } = await axios.put(`${server}/updateprofile`, { firstName, lastName, email, mobile },
+            {
+                config, withCredentials: true
+            });
 
         dispatch({ type: 'updateProfileSuccess', payload: data.message });
     } catch (error) {
@@ -28,6 +21,7 @@ export const updateProfile = (name, email) => async dispatch => {
         });
     }
 };
+
 
 export const updateProfilePicture = formdata => async dispatch => {
     try {
@@ -57,6 +51,7 @@ export const updateProfilePicture = formdata => async dispatch => {
 export const changePassword = (oldPassword, newPassword) => async dispatch => {
     try {
         dispatch({ type: 'changePasswordRequest' });
+        const config = { headers: { "Content-Type": "application/json" } };
 
         const { data } = await axios.put(
             `${server}/changepassword`,
@@ -65,10 +60,7 @@ export const changePassword = (oldPassword, newPassword) => async dispatch => {
                 newPassword,
             },
             {
-                headers: {
-                    'Content-type': 'application/json',
-                },
-
+                config,
                 withCredentials: true,
             }
         );
@@ -140,7 +132,6 @@ export const resetPassword = (token, password) => async dispatch => {
 };
 
 export const addToPlaylist = id => async dispatch => {
-    console.log(id)
     try {
         dispatch({ type: 'addToPlaylistRequest' });
 

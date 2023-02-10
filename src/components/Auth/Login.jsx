@@ -1,14 +1,7 @@
-import {
-  Box,
-  Button,
-  Container,
-  FormLabel,
-  Heading,
-  Input,
-  VStack,
+import { Box, Button,  Container, FormLabel, Heading, Input, VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login } from '../../redux/actions/user';
 
