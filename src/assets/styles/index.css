@@ -1,0 +1,7 @@
+
+@import 'reset.css';
+
+/*-----| Global Classes |-----*/
+table{
+    border-top: 5px double #b2f5ea;
+}

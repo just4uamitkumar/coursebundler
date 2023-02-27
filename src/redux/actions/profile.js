@@ -4,7 +4,6 @@ import axios from 'axios';
 export const updateProfile = (firstName, lastName, email, mobile) => async dispatch => {
     try {
         dispatch({ type: 'updateProfileRequest' });
-        console.log(firstName, lastName, email, mobile)
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
 
