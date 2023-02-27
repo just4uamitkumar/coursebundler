@@ -28,6 +28,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { loadUser } from './redux/actions/user';
 import { ProtectedRoute } from 'protected-route-react'
 import Loader from './components/Layout/Loader/Loader';
+import JsCode from './components/About/JsCode';
+import StudentDetail from './components/Student/StudentDetail';
 
 function App() {
 
@@ -69,6 +71,8 @@ function App() {
               <Route path="/course/:id" element={<CoursePage user={user} />} />
               <Route path='/request' element={<Request />} />
               <Route path='/about' element={<About />} />
+              <Route path='/jscode' element={<JsCode />} />
+              <Route path='/studentDetail' element={<StudentDetail />} />
 
               <Route path='/profile' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
                 <Profile user={user} /></ProtectedRoute>} />

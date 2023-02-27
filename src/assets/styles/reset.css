@@ -1,0 +1,30 @@
+
+/*-----| Global Classes |-----*/
+li { list-style: none; }
+
+a, a:hover { text-decoration: none; }
+
+a:focus, button:focus { outline: 0; }
+
+.clearfix { clear: both; }
+
+.clearfix::after, .clearfix::before { content: ""; display: table; clear: both; }
+
+
+
+
+/*-----| margin |-----*/
+.m-0{margin:0;}
+.m-5{margin:0 0.5rem}
+
+
+/*-----| Text Classes |-----*/
+
+/*-----| Buttons |-----*/
+
+/*-----| Form Controls |-----*/
+
+
+
+/*----| Headings | ------*/
+
